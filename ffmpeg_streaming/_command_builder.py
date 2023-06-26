@@ -146,8 +146,8 @@ def input_args(media):
     return inputs
 
 
-def command_builder(ffmpeg_bin: str, media):
+def command_builder(ffmpeg_bin: str, media, ffmpeg_extra = ''):
     """
     @TODO: add documentation
     """
-    return " ".join(clean_args([ffmpeg_bin] + input_args(media) + stream_args(media)))
+    return " ".join(clean_args([ffmpeg_bin] + input_args(media) + stream_args(media)) + [ffmpeg_extra])
