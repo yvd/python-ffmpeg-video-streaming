@@ -44,6 +44,7 @@ class Save(abc.ABC):
         self.process = None
         self.kill_process_on_exit = options.pop('kill_process_on_exit', False)
         self.ffmpeg_extra = options.pop('ffmpeg_extra', '')
+        self.ffmpeg_filters = options.pop('ffmpeg_filters', '')
         self.options = options
 
     def finish_up(self):
@@ -107,7 +108,7 @@ class Save(abc.ABC):
         """
         @TODO: add documentation
         """
-        with Process(self, command_builder(ffmpeg_bin, self, self.ffmpeg_extra), monitor, **options) as process:
+        with Process(self, command_builder(ffmpeg_bin, self, self.ffmpeg_filters, self.ffmpeg_extra), monitor, **options) as process:
             self.process = process
             self.pipe, err = process.run()
 
